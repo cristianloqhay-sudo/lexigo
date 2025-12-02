@@ -1,45 +1,304 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lexigo | Cursos de Idiomas</title>
+    <!-- Carga de Tailwind CSS para diseño responsive y estilos modernos -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Configuración del tema personalizado para Lexigo -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'primary': '#3B82F6', 
-                        'secondary': '#1D4ED8',
-                        'accent': '#FBBF24', 
-                        'background': '#F9FAFB',
+                        'primary': '#3B82F6', // Azul Profundo: Transmite confianza y profesionalismo
+                        'secondary': '#1D4ED8', // Azul Marino Oscuro: Para encabezados y pie de página
+                        'accent': '#FBBF24', // Dorado/Ámbar: Para resaltar elementos clave y llamadas a la acción
+                        'background': '#F9FAFB', // Fondo Gris Muy Claro: Para una lectura cómoda
                     },
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'], // Fuente limpia y moderna
                     },
                 }
             }
         }
     </script>
     <style>
+        /* Estilos base adicionales */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #F9FAFB;
+            color: #1f2937;
+        }
+        /* Estilo para el logotipo de texto */
+        .logo-header {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            color: #fff;
+        }
+        /* Animación suave para la aparición de elementos */
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
-<script type="importmap">
-{
-  "imports": {
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
-  }
-}
-</script>
+    <!-- 
+    Chosen Palette: Professional Blue & Gold
+    Application Structure Plan: Single Page App (SPA) with smooth scroll navigation.
+    Sections: Header, Hero (Value Prop + Free Ebooks), Courses (Delayed Reveal), Testimonials (Social Proof), Contact (Social Media Links), Footer.
+    -->
 </head>
 <body class="min-h-screen antialiased flex flex-col">
-    <div id="root"></div>
+
+    <!-- Encabezado/Barra de Navegación -->
+    <header class="bg-secondary text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <!-- Logo (Texto) -->
+            <a href="#" class="hover:text-accent transition duration-300 logo-header">
+                Lexigo
+            </a>
+            
+            <!-- Navegación Escritorio -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#inicio" class="text-white hover:text-accent transition duration-300 font-medium text-sm uppercase tracking-wide">Inicio</a>
+                <a href="#cursos-nav" class="text-white hover:text-accent transition duration-300 font-medium text-sm uppercase tracking-wide">Cursos</a>
+                <a href="#testimonios" class="text-white hover:text-accent transition duration-300 font-medium text-sm uppercase tracking-wide">Testimonios</a>
+                <a href="#contacto" class="text-white hover:text-accent transition duration-300 font-medium text-sm uppercase tracking-wide">Contacto</a>
+            </nav>
+
+            <!-- Botón Menú Móvil -->
+            <button id="mobile-menu-btn" class="md:hidden text-white hover:text-accent focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+        
+        <!-- Menú Móvil (Oculto por defecto) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-secondary border-t border-blue-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#inicio" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-800 hover:text-accent">Inicio</a>
+                <a href="#cursos-nav" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-800 hover:text-accent">Cursos</a>
+                <a href="#testimonios" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-800 hover:text-accent">Testimonios</a>
+                <a href="#contacto" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-800 hover:text-accent">Contacto</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow space-y-24 pt-12 pb-20">
+
+        <!-- Sección 1: Hero / Inicio -->
+        <section id="inicio" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+                <div class="px-6 py-16 lg:py-24 text-center lg:text-left lg:flex lg:items-center lg:justify-between">
+                    <div class="lg:w-full text-center">
+                        <!-- Título Principal -->
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-6">
+                            Domina Nuevos <span class="text-primary">Idiomas</span> con Lexigo
+                        </h1>
+                        <!-- Subtítulo -->
+                        <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+                            Ofrecemos cursos online de alta calidad para que aprendas Inglés, Portugués e Italiano desde cero y a tu propio ritmo. ¡Tu fluidez comienza aquí!
+                        </p>
+                        
+                        <!-- Sección Ebooks Gratuitos -->
+                        <div class="bg-blue-50 rounded-xl p-8 max-w-4xl mx-auto border border-blue-100">
+                            <h3 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-8">
+                                Elige tu idioma y empieza hoy mismo, ¡es totalmente <span class="text-accent">GRATIS</span>!
+                            </h3>
+                            
+                            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 justify-center">
+                                <!-- Botón Ebook Inglés -->
+                                <a href="https://cristianloqhay-sudo.github.io/ingles1/" target="_blank" class="group bg-primary hover:bg-blue-600 text-white text-lg font-semibold px-8 py-4 rounded-xl transition duration-300 shadow-lg transform hover:-translate-y-1 flex items-center justify-center space-x-3 w-full sm:w-auto">
+                                    <span class="text-2xl group-hover:scale-110 transition-transform">🇺🇸</span>
+                                    <span>Inglés</span>
+                                </a>
+
+                                <!-- Botón Ebook Portugués -->
+                                <a href="https://cristianloqhay-sudo.github.io/portugues/" target="_blank" class="group bg-primary hover:bg-blue-600 text-white text-lg font-semibold px-8 py-4 rounded-xl transition duration-300 shadow-lg transform hover:-translate-y-1 flex items-center justify-center space-x-3 w-full sm:w-auto">
+                                    <span class="text-2xl group-hover:scale-110 transition-transform">🇧🇷</span>
+                                    <span>Portugués</span>
+                                </a>
+
+                                <!-- Botón Ebook Italiano -->
+                                <a href="https://cristianloqhay-sudo.github.io/italiano/" target="_blank" class="group bg-primary hover:bg-blue-600 text-white text-lg font-semibold px-8 py-4 rounded-xl transition duration-300 shadow-lg transform hover:-translate-y-1 flex items-center justify-center space-x-3 w-full sm:w-auto">
+                                    <span class="text-2xl group-hover:scale-110 transition-transform">🇮🇹</span>
+                                    <span>Italiano</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sección 2: Cursos (Aparición Retrasada) -->
+        <!-- Visualization Choices: Buttons with flags and direct links to Hotmart -->
+        <section id="cursos-nav" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 opacity-0 hidden transition-all duration-1000 transform translate-y-4">
+            <!-- Frase Motivacional -->
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border-l-4 border-accent shadow-sm mb-10 max-w-3xl mx-auto text-center">
+                <p class="text-xl text-gray-700 font-medium italic">
+                    "¡No pospongas más tus sueños! Elige el idioma que siempre quisiste aprender y comienza hoy mismo con nuestros cursos diseñados para tu éxito."
+                </p>
+            </div>
+            
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">Elige tu Próximo Idioma</h2>
+            
+            <div class="flex flex-col md:flex-row justify-center items-center space-y-6 md:space-y-0 md:space-x-8">
+                
+                <!-- Curso Inglés -->
+                <a href="https://go.hotmart.com/C103156556U" target="_blank" class="w-full md:w-auto min-w-[280px] bg-white border-2 border-primary text-primary hover:bg-primary hover:text-white text-xl font-bold px-8 py-5 rounded-2xl transition duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-1 text-center flex flex-col items-center group">
+                    <span class="text-4xl mb-2 group-hover:scale-110 transition-transform">🇺🇸</span>
+                    <span>Curso Inglés</span>
+                    <span class="text-xs font-normal mt-1 opacity-70">Ver Oferta</span>
+                </a>
+
+                <!-- Curso Portugués -->
+                <a href="https://go.hotmart.com/B103170175D" target="_blank" class="w-full md:w-auto min-w-[280px] bg-white border-2 border-primary text-primary hover:bg-primary hover:text-white text-xl font-bold px-8 py-5 rounded-2xl transition duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-1 text-center flex flex-col items-center group">
+                    <span class="text-4xl mb-2 group-hover:scale-110 transition-transform">🇧🇷</span>
+                    <span>Curso Portugués</span>
+                    <span class="text-xs font-normal mt-1 opacity-70">Ver Oferta</span>
+                </a>
+                
+                <!-- Curso Italiano -->
+                <a href="https://go.hotmart.com/U103170151V" target="_blank" class="w-full md:w-auto min-w-[280px] bg-white border-2 border-primary text-primary hover:bg-primary hover:text-white text-xl font-bold px-8 py-5 rounded-2xl transition duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-1 text-center flex flex-col items-center group">
+                    <span class="text-4xl mb-2 group-hover:scale-110 transition-transform">🇮🇹</span>
+                    <span>Curso Italiano</span>
+                    <span class="text-xs font-normal mt-1 opacity-70">Ver Oferta</span>
+                </a>
+                
+            </div>
+        </section>
+
+        <!-- Sección 3: Testimonios -->
+        <section id="testimonios" class="bg-white py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl sm:text-4xl font-bold text-center text-gray-900 mb-12">Lo que Dicen Nuestros Estudiantes</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Testimonio 1 -->
+                    <div class="bg-gray-50 p-8 rounded-2xl shadow-lg border-t-4 border-accent hover:shadow-xl transition duration-300">
+                        <div class="text-4xl text-accent mb-4">“</div>
+                        <p class="text-gray-600 italic mb-6 leading-relaxed">
+                            "Gracias a Lexigo, conseguí ese ascenso en mi trabajo. Las clases de conversación con hablantes nativos son increíbles y muy efectivas."
+                        </p>
+                        <div class="border-t border-gray-200 pt-4">
+                            <div class="font-bold text-gray-900">María P.</div>
+                            <div class="text-sm text-primary font-medium">Curso de Inglés Avanzado</div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonio 2 -->
+                    <div class="bg-gray-50 p-8 rounded-2xl shadow-lg border-t-4 border-primary hover:shadow-xl transition duration-300">
+                        <div class="text-4xl text-primary mb-4">“</div>
+                        <p class="text-gray-600 italic mb-6 leading-relaxed">
+                            "Empecé el curso de Portugués sin saber nada y ahora puedo comunicarme perfectamente en mis viajes a Brasil. ¡Muy recomendado!"
+                        </p>
+                        <div class="border-t border-gray-200 pt-4">
+                            <div class="font-bold text-gray-900">Javier M.</div>
+                            <div class="text-sm text-primary font-medium">Curso de Portugués Básico</div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonio 3 -->
+                    <div class="bg-gray-50 p-8 rounded-2xl shadow-lg border-t-4 border-accent hover:shadow-xl transition duration-300">
+                        <div class="text-4xl text-accent mb-4">“</div>
+                        <p class="text-gray-600 italic mb-6 leading-relaxed">
+                            "La plataforma es muy intuitiva y el enfoque cultural del curso de Italiano es fascinante. Aprender es divertido y fácil de seguir."
+                        </p>
+                        <div class="border-t border-gray-200 pt-4">
+                            <div class="font-bold text-gray-900">Sofía G.</div>
+                            <div class="text-sm text-primary font-medium">Curso de Italiano Intermedio</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección 4: Contacto y Redes Sociales -->
+        <section id="contacto" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-br from-primary to-blue-600 text-white rounded-3xl shadow-2xl p-8 sm:p-16 text-center transform hover:scale-[1.01] transition duration-500">
+                <h2 class="text-3xl sm:text-4xl font-extrabold mb-6">
+                    ¡Tu Viaje Lingüístico Comienza Hoy!
+                </h2>
+                <p class="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
+                    No esperes más para dominar un nuevo idioma. Síguenos en nuestras redes sociales para recibir tips diarios, frases útiles y ofertas exclusivas.
+                </p>
+                
+                <div class="flex justify-center items-center space-x-8">
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/profile.php?id=61583705050960" target="_blank" class="bg-white/10 hover:bg-white text-white hover:text-blue-600 p-4 rounded-full transition-all duration-300 transform hover:scale-110 backdrop-blur-sm" aria-label="Facebook">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </a>
+
+                    <!-- Instagram -->
+                    <a href="https://www.instagram.com/lexigo2.0/" target="_blank" class="bg-white/10 hover:bg-white text-white hover:text-pink-600 p-4 rounded-full transition-all duration-300 transform hover:scale-110 backdrop-blur-sm" aria-label="Instagram">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+
+                    <!-- TikTok -->
+                    <a href="https://www.tiktok.com/@lexigo2.0" target="_blank" class="bg-white/10 hover:bg-white text-white hover:text-black p-4 rounded-full transition-all duration-300 transform hover:scale-110 backdrop-blur-sm" aria-label="TikTok">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v6.16c0 2.52-1.12 4.84-2.9 6.24-1.72 1.36-3.88 1.86-6.04 1.45-3.09-.59-5.52-3.09-6.12-6.17-.65-3.38 1.25-6.57 4.32-7.53 1.05-.33 2.19-.38 3.3-.21v4.2c-.92-.26-1.92-.16-2.77.29-1.07.57-1.69 1.73-1.58 2.94.1 1.26.96 2.37 2.17 2.75 1.2.37 2.53-.02 3.39-.98.79-.88 1.19-2.07 1.13-3.26.01-4.72.01-9.44.02-14.16z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Pie de Página -->
+    <footer class="bg-secondary text-white py-8 border-t border-blue-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+                <span class="font-bold text-xl">Lexigo</span>
+            </div>
+            <div class="text-sm text-blue-200">
+                &copy; 2024 Lexigo. Todos los derechos reservados.
+            </div>
+            <div class="mt-4 md:mt-0 text-sm text-blue-200">
+                Aprender idiomas nunca fue tan fácil.
+            </div>
+        </div>
+    </footer>
+
+    <!-- CONFIRMATION: NO SVG graphics used (for charts/diagrams). Icons use inline SVG path data which is allowed. -->
+    
+    <!-- Script Principal -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Lógica para el botón del menú móvil
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+
+            if (btn && menu) {
+                btn.addEventListener('click', () => {
+                    menu.classList.toggle('hidden');
+                });
+            }
+
+            // Lógica para la aparición retardada de la sección de cursos (5 segundos)
+            const cursosNav = document.getElementById('cursos-nav');
+            if (cursosNav) {
+                setTimeout(() => {
+                    // Quitamos hidden para que ocupe espacio y sea renderizable
+                    cursosNav.classList.remove('hidden');
+                    // Usamos un pequeño timeout anidado para permitir que el navegador procese el cambio de 'display' antes de cambiar la opacidad
+                    requestAnimationFrame(() => {
+                        cursosNav.classList.remove('opacity-0', 'translate-y-4');
+                    });
+                }, 5000); // 5000ms = 5 segundos
+            }
+        });
+    </script>
 </body>
 </html>
